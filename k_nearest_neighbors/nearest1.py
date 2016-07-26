@@ -34,8 +34,9 @@ for i in range(0,2000):
     data.append([[x1,x2],y])
 
 
+n = 1800
 #separate into two datasets
-for i in range(0,1800):
+for i in range(0,n):
    training_set.append(data[i])
 
 for i in range(0,200):

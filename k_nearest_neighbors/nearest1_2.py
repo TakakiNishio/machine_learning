@@ -2,11 +2,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-l = 5
-
-alpha = 2
-beta  = 5
-gamma = 3
+l = 0.15
 
 data = []
 training_set = []
@@ -14,38 +10,42 @@ test_set = []
 
 yh = []
 
+data_n = 2000
+train_n = 1000
+test_n = 200
+
 def f(x1,x2):
-    ans = alpha + beta * x1 + gamma * x2
+    ans = (x1-0.6)**2 + (x2-0.5)**2
     return ans
 
 
 #create data
-for i in range(0,2000):
+for i in range(0,data_n):
     x1 = np.random.rand()
     x2 = np.random.rand()
     h = f(x1,x2)
     if h > l:
         y = 1
-        #plt.plot(x1,x2,"bo")
+        plt.plot(x1,x2,"bo")
     else:
         y = 0
-        #plt.plot(x1,x2,"ro")
+        plt.plot(x1,x2,"ro")
 
     data.append([[x1,x2],y])
 
 
 #separate into two datasets
-for i in range(0,1800):
+for i in range(0,train_n):
    training_set.append(data[i])
 
-for i in range(0,200):
-    test_set.append(data[i+1800])
+for i in range(0,test_n):
+    test_set.append(data[i+train_n])
 
 
-#estimation
-for i in range(0,200):
-    min_dist = 100
-    for j in range(0,1800):
+#estimation (1-neighbors)
+for i in range(0,test_n):
+    min_dist = 1000
+    for j in range(0,train_n):
         dist = math.sqrt(((test_set[i][0][0] - training_set[j][0][0])**2) +((test_set[i][0][1] - training_set[j][0][1])**2))
 
         if dist < min_dist:
@@ -62,12 +62,12 @@ for i in range(0,200):
 
 #success_counter
 success = 0
-for i in range(0,200):
+for i in range(0,test_n):
     if test_set[i][1] == yh[i]:
         success = success + 1
 
-success_rate = float(success)/200
+success_rate = float(success)/test_n
 
 print ""
 print "success points : " + str(success) + "  success_rate : " + str(success_rate)
-#plt.show()
+plt.show()

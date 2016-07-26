@@ -46,7 +46,7 @@ for i in range(0,200):
 for i in range(0,200):
     min_dist = 100
     for j in range(0,1800):
-        dist = math.sqrt(((test_set[i][0][0] - training_set[j][0][0])**2) +((test_set[i][0][1] - training_set[j][0][1])**2))
+        dist = math.sqrt(((test_set[i][0][0] - training_set[j][0][0])**2) +((test_set[i][0][1] - training_set[i][0][1])**2))
 
         if dist < min_dist:
             min_dist = dist
