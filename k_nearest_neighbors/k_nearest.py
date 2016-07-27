@@ -2,30 +2,21 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-n = 2000
-train_n = 1800
-test_n = 200
-
-k = 5
-
-data = []
-training_set = []
-test_set = []
-
+#origin function
 def f(x1,x2):
     alpha = 2
     beta  = 5
     gamma = 3
-    d = 1
+    d = 2
     ans = alpha + beta * x1 + gamma * x2 + np.random.rand() * d
     return ans
 
 #create data
 def data_generator(data_n):
-    plt.figure(1)
+    l = 7
     raw_data = []
+    plt.figure(1)
     for i in range(0,data_n):
-        l = 6
         x1 = np.random.rand()
         x2 = np.random.rand()
         h = f(x1,x2)
@@ -40,16 +31,7 @@ def data_generator(data_n):
     return raw_data
 
 
-data = data_generator(n)
-
 #separate into two datasets
-
-for i in range(0,train_n):
-    training_set.append(data[i])
-
-for i in range(0,test_n):
-    test_set.append(data[i+train_n])
-
 #def separate_train_set(raw_data,train_n):
 #    train_set = []
 #    for i in range(0,train_n):
@@ -62,8 +44,8 @@ for i in range(0,test_n):
 #        test_set.append(raw_data[i+train_n])
 #    return test_set
 
-#estimation (k-neighbors)
 
+#estimation (k-neighbors)
 def estimation(training_set,test_set,k):
 
     y = []
@@ -100,16 +82,36 @@ def estimation(training_set,test_set,k):
 
     return error_rate
 
-#training_set = separate_train_set(data,train_n)
-#test_set = separate_test_set(data,test_n,train_n)
+if __name__ == '__main__':
 
-plt.figure(2)
-k_list = []
-error_list = []
-k_variation = 20
-for k in range(1,k_variation+1):
-    k_list.append(k)
-    error_list.append(estimation(training_set,test_set,k))
-    plt.plot(k_list,error_list,"ro-")
+    n = 2000
+    train_n = 1800
+    test_n = 200
 
-plt.show()
+    data = []
+    training_set = []
+    test_set = []
+
+    k_list = []
+    error_list = []
+    k_variation = 20
+
+    data = data_generator(n)
+
+    #training_set = separate_train_set(data,train_n)
+    #test_set = separate_test_set(data,test_n,train_n)
+
+    for i in range(0,train_n):
+        training_set.append(data[i])
+
+    for i in range(0,test_n):
+        test_set.append(data[i+train_n])
+
+    plt.figure(2)
+
+    for k in range(1,k_variation+1):
+        k_list.append(k)
+        error_list.append(estimation(training_set,test_set,k))
+        plt.plot(k_list,error_list,"ro-")
+
+    plt.show()
