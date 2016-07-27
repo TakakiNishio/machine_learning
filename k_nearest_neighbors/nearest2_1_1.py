@@ -16,8 +16,10 @@ data_n = 2000
 train_n = 1800
 test_n = 200
 
+d = 2
+
 def f(x1,x2):
-    ans = alpha + beta * x1 + gamma * x2
+    ans = alpha + beta * x1 + gamma * x2 + np.random.rand() * d
     return ans
 
 
@@ -26,7 +28,7 @@ for i in range(0,data_n):
     x1 = np.random.rand()
     x2 = np.random.rand()
     h = f(x1,x2)
-    if h > np.random.rand() * 10:
+    if h > l:
         y = 1
         plt.plot(x1,x2,"bo")
     else:
@@ -46,7 +48,7 @@ for i in range(0,test_n):
 
 #estimation (k-neighbors)
 
-k = 5
+k = 15
 y = []
 yh = []
 
