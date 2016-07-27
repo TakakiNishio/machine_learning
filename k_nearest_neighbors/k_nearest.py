@@ -2,24 +2,25 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-#origin function
-def f(x1,x2):
+
+#define function
+def f(x1,x2,d):
     alpha = 2
     beta  = 5
     gamma = 3
-    d = 2
     ans = alpha + beta * x1 + gamma * x2 + np.random.rand() * d
     return ans
 
+
 #create data
-def data_generator(data_n):
+def data_generator(data_n,d):
     l = 7
     raw_data = []
     plt.figure(1)
     for i in range(0,data_n):
         x1 = np.random.rand()
         x2 = np.random.rand()
-        h = f(x1,x2)
+        h = f(x1,x2,d)
         if h > l:
             y = 1
             plt.plot(x1,x2,"bo")
@@ -29,20 +30,6 @@ def data_generator(data_n):
 
         raw_data.append([[x1,x2],y])
     return raw_data
-
-
-#separate into two datasets
-#def separate_train_set(raw_data,train_n):
-#    train_set = []
-#    for i in range(0,train_n):
-#        training_set.append(raw_data[i])
-#    return train_set
-
-#def separate_test_set(raw_data,test_n):
-#    test_set = []
-#    for i in range(0,test_n):
-#        test_set.append(raw_data[i+train_n])
-#    return test_set
 
 
 #estimation (k-neighbors)
@@ -82,11 +69,15 @@ def estimation(training_set,test_set,k):
 
     return error_rate
 
+
+#main function
 if __name__ == '__main__':
 
     n = 2000
     train_n = 1800
     test_n = 200
+    k_max = 20
+    a = 2
 
     data = []
     training_set = []
@@ -94,9 +85,8 @@ if __name__ == '__main__':
 
     k_list = []
     error_list = []
-    k_variation = 20
 
-    data = data_generator(n)
+    data = data_generator(n,a)
 
     #training_set = separate_train_set(data,train_n)
     #test_set = separate_test_set(data,test_n,train_n)
@@ -109,7 +99,7 @@ if __name__ == '__main__':
 
     plt.figure(2)
 
-    for k in range(1,k_variation+1):
+    for k in range(3,k_max+1):
         k_list.append(k)
         error_list.append(estimation(training_set,test_set,k))
         plt.plot(k_list,error_list,"ro-")
