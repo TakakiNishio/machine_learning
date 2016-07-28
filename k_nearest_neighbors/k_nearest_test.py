@@ -69,38 +69,51 @@ def estimation(training_set,test_set,k):
 if __name__ == '__main__':
 
     N = 10
-    k_max = 151
     data_n = 2000
     train_n = 1800
     test_n = 200
+    k = 1
     disturbance = 2
     k_list = []
     error_list = []
 
-    for k in range(0,k_max+1):
-        k_list.append(k)
-        error_sum = 0
-        for i in range(0,N):
+    error_sum = 0
 
-            data = []
-            training_set = []
-            test_set = []
+    data = []
+    training_set = []
+    test_set = []
 
-            data = data_generator(data_n,disturbance)
+    data = data_generator(data_n,disturbance)
 
-            for m in range(0,train_n):
-                training_set.append(data[m])
+    for m in range(0,train_n):
+        training_set.append(data[m])
 
-            for n in range(0,test_n):
-                test_set.append(data[n+train_n])
+    for n in range(0,test_n):
+        test_set.append(data[n+train_n])
 
-            error_rate = estimation(training_set,test_set,k)
-            print error_rate
-            error_sum = error_sum + error_rate
+    error_rate = estimation(training_set,test_set,k)
+    print error_rate
 
-        error_list.append(error_sum/N)
+"""
+    for i in range(0,N):
 
-        print "k : "+ str(k) + "  error_average : " + str(error_sum/N) + "[%]"
+        data = []
+        training_set = []
+        test_set = []
 
-plt.figure(1)
-plt.plot(k_list,error_list)
+        data = data_generator(data_n,disturbance)
+
+        for m in range(0,train_n):
+            training_set.append(data[i])
+
+        for n in range(0,test_n):
+            test_set.append(data[i+train_n])
+
+        error_rate = estimation(training_set,test_set,k)
+        print error_rate
+        error_sum = error_sum + error_rate
+
+    error_list.append(error_sum/N)
+
+    print "k : "+ str(k) + "  error_average : " + str(error_sum/N) + "[%]"
+"""

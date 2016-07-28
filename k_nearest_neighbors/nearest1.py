@@ -2,11 +2,12 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-l = 5
+l = 7
 
 alpha = 2
 beta  = 5
 gamma = 3
+d = 2
 
 data = []
 training_set = []
@@ -15,7 +16,7 @@ test_set = []
 yh = []
 
 def f(x1,x2):
-    ans = alpha + beta * x1 + gamma * x2
+    ans = alpha + beta * x1 + gamma * x2 + np.random.rand() * d
     return ans
 
 
@@ -26,10 +27,10 @@ for i in range(0,2000):
     h = f(x1,x2)
     if h > l:
         y = 1
-        #plt.plot(x1,x2,"bo")
+        plt.plot(x1,x2,"bo")
     else:
         y = 0
-        #plt.plot(x1,x2,"ro")
+        plt.plot(x1,x2,"ro")
 
     data.append([[x1,x2],y])
 
@@ -71,4 +72,4 @@ success_rate = float(success)/200
 
 print ""
 print "success points : " + str(success) + "  success_rate : " + str(success_rate)
-#plt.show()
+plt.show()
