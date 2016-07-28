@@ -65,7 +65,7 @@ def estimation(training_set,test_set,k):
 
     error_rate = 1.0 - float(success)/test_n
 
-    print "k : "+ str(k) + "  error : " + str(error_rate) + "[%]"
+    print "k : "+ str(k) + "  error : " + str(error_rate * 100) + "[%]"
 
     return error_rate
 
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     n = 2000
     train_n = 1800
     test_n = 200
-    k_max = 20
+    k_max = 151
     a = 2
 
     data = []
@@ -88,9 +88,6 @@ if __name__ == '__main__':
 
     data = data_generator(n,a)
 
-    #training_set = separate_train_set(data,train_n)
-    #test_set = separate_test_set(data,test_n,train_n)
-
     for i in range(0,train_n):
         training_set.append(data[i])
 
@@ -99,7 +96,7 @@ if __name__ == '__main__':
 
     plt.figure(2)
 
-    for k in range(3,k_max+1):
+    for k in range(5,k_max+1):
         k_list.append(k)
         error_list.append(estimation(training_set,test_set,k))
         plt.plot(k_list,error_list,"ro-")
