@@ -46,13 +46,13 @@ for i in range(0,test_n):
 #estimation (3-neighbors)
 
 k = 3
-min_index_list = []
 y = []
 yh = []
 
 for i in range(0,test_n):
-    min_dist = 1000
+    min_dist = 10000
     sum_y = 0
+    min_index_list = []
     for j in range(0,train_n):
         dist = math.sqrt(((test_set[i][0][0] - training_set[j][0][0])**2) +((test_set[i][0][1] - training_set[j][0][1])**2))
 
@@ -60,9 +60,9 @@ for i in range(0,test_n):
             min_dist = dist
             min_index = j
             min_index_list.append(j)
+            print len(min_index_list)
 
     for n in range(0,k):
-        print len(min_index_list)
         index_y = min_index_list[n]
         sum_y = sum_y + training_set[index_y][1]
 
