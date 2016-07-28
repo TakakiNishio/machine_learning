@@ -77,7 +77,7 @@ if __name__ == '__main__':
     k_list = []
     error_list = []
 
-    for k in range(0,k_max+1):
+    for k in range(1,k_max+1):
         k_list.append(k)
         error_sum = 0
         for i in range(0,N):
@@ -95,7 +95,7 @@ if __name__ == '__main__':
                 test_set.append(data[n+train_n])
 
             error_rate = estimation(training_set,test_set,k)
-            print error_rate
+            #print error_rate
             error_sum = error_sum + error_rate
 
         error_list.append(error_sum/N)
@@ -103,4 +103,5 @@ if __name__ == '__main__':
         print "k : "+ str(k) + "  error_average : " + str(error_sum/N) + "[%]"
 
 plt.figure(1)
-plt.plot(k_list,error_list)
+plt.plot(k_list,error_list,"ro-")
+plt.show()
