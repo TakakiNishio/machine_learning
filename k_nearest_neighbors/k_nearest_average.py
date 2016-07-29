@@ -74,11 +74,10 @@ if __name__ == '__main__':
     train_n = 1800
     test_n = 200
     disturbance = 2
-    k_list = []
+    k_list = range(1,k_max+1)
     error_list = []
 
-    for k in range(1,k_max+1):
-        k_list.append(k)
+    for k in k_list:
         error_sum = 0
         for i in range(0,N):
 
@@ -96,7 +95,7 @@ if __name__ == '__main__':
 
             error_rate = estimation(training_set,test_set,k)
             #print error_rate
-            error_sum = error_sum + error_rate
+            error_sum += error_rate
 
         error_list.append(error_sum/N)
 
