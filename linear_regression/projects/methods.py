@@ -63,7 +63,7 @@ def newton_method(data,real_beta):
     pr_pb = []
     plt.figure(2)
     plt.plot(real_beta[0],real_beta[1],"ro",label = "real beta")
-    for i in range(0,2000):
+    for i in range(0,600):
         rss_n = rss(data,beta_n)
         pr_pb = prss_pbeta(data,beta_n)
         pr_pb0 = pr_pb[0]
