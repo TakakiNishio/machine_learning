@@ -12,14 +12,14 @@ def rss(data,beta_n):
     return r_n
 
 
-#calculate RSS
+#calculate partial differential
 def prss_pbeta(data,beta_n):
-    pr_pb = [1,1]
+    pr_pb = [0,0]
     pr_pb0 = 0
     pr_pb1 = 0
     for i in range(0,len(data)):
         pr_pb0 = pr_pb0 + (-2 * (data[i][1] - (data[i][0] * beta_n[1] + beta_n[0])))
-        pr_pb1 = pr_pb0 + (-2 * data[i][0] * (data[i][1] - (data[i][0] * beta_n[1] + beta_n[0])))
+        pr_pb1 = pr_pb1 + (-2 * data[i][0] * (data[i][1] - (data[i][0] * beta_n[1] + beta_n[0])))
     pr_pb[0] = pr_pb0/float(len(data))
     pr_pb[1] = pr_pb1/float(len(data))
     return pr_pb
@@ -30,8 +30,8 @@ def random_search(data,real_beta):
     beta0_list = []
     beta1_list = []
     first_beta = [1,1]
-    last_beta = [1,1]
-    beta_n = [1,1]
+    last_beta = [0,0]
+    beta_n = [0,0]
     min_r_n = rss(data,first_beta)
     plt.figure(2)
     plt.plot(real_beta[0],real_beta[1],"ro",label = "real beta")
@@ -56,17 +56,14 @@ def random_search(data,real_beta):
 
 #linear_regression -- Newton method
 def newton_method(data,real_beta):
-    delta = 0.2
+    delta = 0.005
     beta0_list = []
     beta1_list = []
-    first_beta = [1,1]
-    last_beta = [1,1]
-    beta_n = [0,0]
+    beta_n = [1,1]
     pr_pb = []
-    rss_n = rss(data,first_beta)
     plt.figure(2)
     plt.plot(real_beta[0],real_beta[1],"ro",label = "real beta")
-    for i in range(0,1000):
+    for i in range(0,2000):
         rss_n = rss(data,beta_n)
         pr_pb = prss_pbeta(data,beta_n)
         pr_pb0 = pr_pb[0]
@@ -74,12 +71,12 @@ def newton_method(data,real_beta):
 
         if pr_pb0 < 0:
             beta_n[0] += delta
-        elif pr_pb > 0:
+        elif pr_pb0 > 0:
             beta_n[0] -= delta
 
         if pr_pb1 < 0:
             beta_n[1] += delta
-        elif pr_pb > 0:
+        elif pr_pb1 > 0:
             beta_n[1] -= delta
 
         print "Epoc : " + str(i) + "  pr_pb0 : " + str(pr_pb0) + "  pr_pb1 : " + str(pr_pb1) + "  RSS : " + str(rss_n)
