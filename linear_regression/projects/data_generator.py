@@ -4,14 +4,13 @@ import matplotlib.pyplot as plt
 
 
 #define a function
-def f(x):
-    beta = [1.4, 3.2]
+def f(x,beta):
     ans = x * beta[1] + beta[0] + np.random.normal(0,0.01)
     return ans
 
 
 #create a dataset
-def data_generator(data_n):
+def data_generator(data_n,beta):
     data = []
     x = []
     y = []
@@ -19,7 +18,7 @@ def data_generator(data_n):
         x.append(np.random.rand())
 
     for i in range(0,data_n):
-        y.append(f(x[i]))
+        y.append(f(x[i],beta))
 
     plt.figure(1)
     plt.plot(x,y,"ro",label = "generated data")
