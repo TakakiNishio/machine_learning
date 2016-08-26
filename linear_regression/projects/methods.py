@@ -2,33 +2,6 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-
-#define a function
-def f(x):
-    beta = [1.4, 3.2]
-    ans = x * beta[1] + beta[0] + np.random.normal(0,0.01)
-    return ans
-
-
-#create a dataset
-def data_generator(data_n):
-    data = []
-    x = []
-    y = []
-    for i in range(0,data_n):
-        x.append(np.random.rand())
-
-    for i in range(0,data_n):
-        y.append(f(x[i]))
-
-    plt.figure(1)
-    plt.plot(x,y,"ro",label = "generated data")
-    plt.xlabel("x", fontsize=20, fontname='serif')
-    plt.ylabel("y", fontsize=20, fontname='serif')
-    data = zip(x,y)
-    return data
-
-
 #calculate RSS
 def rss(data,beta_n):
     r_n = 0
@@ -79,14 +52,3 @@ def h(n,last_beta):
     plt.plot(h_x,h_y,"b-",label = "estimated data")
     plt.legend()
     return h
-
-
-#main function
-if __name__ == '__main__':
-
-    n = 100
-    dataset = data_generator(n)
-    searched_beta = random_search(dataset)
-    result_data = h(n,searched_beta)
-    print "last_beta : "+ str(searched_beta)
-    plt.show()
