@@ -65,8 +65,8 @@ def loss(data,beta0,beta1):
 #visualization of LOSS
 def visualization_in_3d(data):
 
-    beta0 = np.arange(-5,5,0.1)
-    beta1 = np.arange(-5,5,0.1)
+    beta0 = np.arange(0,10,0.1)
+    beta1 = np.arange(0,10,0.1)
 
     X,Y = np.meshgrid(beta0,beta1)
 
@@ -77,7 +77,7 @@ def visualization_in_3d(data):
     ax.plot_wireframe(X,Y,Z)
 
     fig = plt.figure(3)
-    cm = generate_cmap(['blue', 'white', 'red'])
+    cm = generate_cmap(['blue', 'indigo', 'red'])
     interval = [i/10. -1 for i in range(1000)]
     im = plt.contour(X, Y, Z, interval, alpha=0.5, cmap=cm)
     fig.colorbar(im)
