@@ -9,13 +9,14 @@ import methods as m
 #main function
 if __name__ == '__main__':
 
-    n = 1000
-    real_beta = [1.4,3.2]
-    dataset = dg3.data_generator(n,real_beta)
-    LOSS = dg3.visualization_in_3d(dataset)
+    #first_beta = [0,0]
+    #first_beta = [1,1]
+    first_beta = [-1,-1]
 
-    #searched_beta = m.random_search(dataset,real_beta)
-    searched_beta = m.newton_method(dataset,real_beta)
-    result_data = m.h(n,searched_beta)
+    LOSS = dg3.visualization_in_3d(1)
+
+    #searched_beta = m.random_search(first_beta)
+    searched_beta = m.newton_method(first_beta)
+
     print "last_beta : " + str(searched_beta)
     plt.show()
