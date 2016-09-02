@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import random
 
 import data_generator_3d as dg3
 
@@ -17,6 +18,18 @@ def prss_pbeta_1(beta_n):
     return pr_pb
 
 
+#calculate partial differential of LOSS-2
+def prss_pbeta_2(beta_n):
+    pr_pb = [0,0]
+    pr_pb0 = 0
+    pr_pb1 = 0
+    pr_pb0 = 2 * (beta_n[0] - 2) * np.exp(-(((beta_n[0] - 2)**2)/3)-(((beta_n[1] - 2)**2)/3)) + (8/3) * (beta_n[0] + 2) * np.exp(-(((beta_n[0] + 2)**2)/3)-(((beta_n[1] + 2)**2)/3))
+    pr_pb1 = 2 * (beta_n[1] - 2) * np.exp(-(((beta_n[0] - 2)**2)/3)-(((beta_n[1] - 2)**2)/3)) + (8/3) * (beta_n[1] + 2) * np.exp(-(((beta_n[0] + 2)**2)/3)-(((beta_n[1] + 2)**2)/3))
+    pr_pb[0] = pr_pb0
+    pr_pb[1] = pr_pb1
+    return pr_pb
+
+
 #linear_regression -- random search
 def random_search(first_beta):
     beta0_list = []
@@ -25,11 +38,13 @@ def random_search(first_beta):
     beta1_list.append(first_beta[1])
     last_beta = [0,0]
     beta_n = [0,0]
-    min_loss = dg3.loss_1(first_beta[0],first_beta[1])
+    #min_loss = dg3.loss_1(first_beta[0],first_beta[1])
+    min_loss = dg3.loss_2(first_beta[0],first_beta[1])
     for i in range(0,1000):
-        beta_n[0] = 10 * np.random.rand() - 5
-        beta_n[1] = 10 * np.random.rand() - 5
-        loss_n = dg3.loss_1(beta_n[0],beta_n[1])
+        beta_n[0] = random.uniform(-5,5)
+        beta_n[1] = random.uniform(-5,5)
+        #loss_n = dg3.loss_1(beta_n[0],beta_n[1])
+        loss_n = dg3.loss_2(beta_n[0],beta_n[1])
         if loss_n < min_loss :
             min_loss = loss_n
             last_beta[0] = beta_n[0]
@@ -57,8 +72,10 @@ def newton_method(first_beta):
     beta_n = first_beta
     pr_pb = []
     for i in range(0,epoch):
-        loss_n = dg3.loss_1(beta_n[0],beta_n[1])
-        pr_pb = prss_pbeta_1(beta_n)
+        #loss_n = dg3.loss_1(beta_n[0],beta_n[1])
+        loss_n = dg3.loss_2(beta_n[0],beta_n[1])
+        #pr_pb = prss_pbeta_1(beta_n)
+        pr_pb = prss_pbeta_2(beta_n)
         pr_pb0 = pr_pb[0]
         pr_pb1 = pr_pb[1]
 
@@ -72,42 +89,6 @@ def newton_method(first_beta):
 
     plt.figure(2)
     plt.plot(beta0_list,beta1_list,"ro-",label = "estimated beta")
-    plt.xlabel("beta_0", fontsize=20, fontname='serif')
-    plt.ylabel("beta_1", fontsize=20, fontname='serif')
-    plt.legend()
-
-    return beta_n
-
-#linear_regression -- Newton method
-def simple_newton_method(first_beta):
-    delta = 0.000001
-    beta0_list = []
-    beta1_list = []
-    beta_n = [1,1]
-    pr_pb = []
-    for i in range(0,600):
-        rss_n = rss(data,beta_n)
-        pr_pb = prss_pbeta_1(beta_n)
-        pr_pb0 = pr_pb[0]
-        pr_pb1 = pr_pb[1]
-
-        if pr_pb0 < 0:
-            beta_n[0] += delta
-        elif pr_pb0 > 0:
-            beta_n[0] -= delta
-
-        if pr_pb1 < 0:
-            beta_n[1] += delta
-        elif pr_pb1 > 0:
-            beta_n[1] -= delta
-
-        print "Epoch : " + str(i) + "  beta0 : " + str(beta_n[0]) + "  beta1 : " + str(beta_n[1]) + "  RSS : " + str(rss_n)
-
-        beta0_list.append(beta_n[0])
-        beta1_list.append(beta_n[1])
-
-    plt.figure(2)
-    plt.plot(beta0_list,beta1_list,"bo-",label = "estimated beta")
     plt.xlabel("beta_0", fontsize=20, fontname='serif')
     plt.ylabel("beta_1", fontsize=20, fontname='serif')
     plt.legend()
