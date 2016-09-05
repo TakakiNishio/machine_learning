@@ -14,8 +14,8 @@ if __name__ == '__main__':
     dataset = dg3.data_generator(n,real_beta)
     LOSS = dg3.visualization_in_3d(dataset)
 
-    #searched_beta = m.random_search(dataset,real_beta)
-    searched_beta = m.newton_method(dataset,real_beta)
+    searched_beta = m.random_search(dataset,real_beta)
+    #searched_beta = m.newton_method(dataset,real_beta)
     result_data = m.h(n,searched_beta)
     print "last_beta : " + str(searched_beta)
     plt.show()

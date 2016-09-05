@@ -1,4 +1,5 @@
 import numpy as np
+import pylab as pl
 import math
 
 import matplotlib.pyplot as plt
@@ -30,6 +31,9 @@ def loss_2(beta0,beta1):
     return loss
 
 
+#LOSS-3
+
+
 #visualization of LOSS
 def visualization_in_3d(data):
 
@@ -51,14 +55,15 @@ def visualization_in_3d(data):
     fig = plt.figure(2)
     cm = generate_cmap(['blue', 'indigo', 'red'])
     interval = [i/10. -10 for i in range(1000)]
-<<<<<<< HEAD
-    print interval
-=======
->>>>>>> ce9d0600162b5ea2c6bfb95397767fb7997d43f7
     im = plt.contour(X, Y, Z, interval, alpha=0.5, cmap=cm)
     fig.colorbar(im)
     plt.xlim(-5, 5)
     plt.ylim(-5, 5)
     #plt.show()
+
+    fig = plt.figure(3)
+    ax = Axes3D(fig)
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=pl.cm.gray)
+    ax.contourf(X, Y, Z, zdir='z', offset=-4, cmap=pl.cm.gray)
 
     return data
