@@ -85,7 +85,8 @@ def visualization_in_3d(data):
 
     fig = plt.figure(3)
     cm = generate_cmap(['blue', 'indigo', 'red'])
-    interval = [i/10. -1 for i in range(1000)]
+    interval = [i/10. -10 for i in range(1000)]
+    print interval
     im = plt.contour(X, Y, Z, interval, alpha=0.5, cmap=cm)
     fig.colorbar(im)
     plt.xlim(0, 5)
