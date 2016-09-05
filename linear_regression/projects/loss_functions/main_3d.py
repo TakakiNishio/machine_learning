@@ -11,8 +11,8 @@ import methods as m
 if __name__ == '__main__':
 
     #first_beta = [0,0]
-    #first_beta = [1,1]
-    first_beta = [-1,-1]
+    first_beta = [1,1]
+    #first_beta = [-1,-1]
 
     LOSS = dg3.visualization_in_3d(1)
 
