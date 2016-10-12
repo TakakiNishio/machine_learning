@@ -26,7 +26,7 @@ def loss_1(beta0,beta1):
 
 #LOSS-2
 def loss_2(beta0,beta1):
-    loss = - 3 * np.exp(-(((beta0 - 2)**2)/3)-(((beta1 - 2)**2)/3)) - 4 * np.exp(-(((beta0 + 2)**2)/4)-(((beta1 + 2)**2)/4))
+    loss = - 4 * np.exp(-(((beta0 - 2)**2)/3)-(((beta1 - 2)**2)/3)) - 3 * np.exp(-(((beta0 + 2)**2)/4)-(((beta1 + 2)**2)/4))
     return loss
 
 

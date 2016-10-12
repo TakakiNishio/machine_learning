@@ -46,8 +46,8 @@ for i in range(0,data_n):
 
     data.append([[x1,x2],y])
 
-plt.plot(y1_x1_data,y1_x2_data,"bo",label = "y=1")
-plt.plot(y0_x1_data,y0_x2_data,"ro",label = "y=0")
+plt.plot(y1_x1_data,y1_x2_data,"bo",label = "y=1",fontsize=20)
+plt.plot(y0_x1_data,y0_x2_data,"ro",label = "y=0",fontsize=20)
 
 #separate into two datasets
 for i in range(0,train_n):

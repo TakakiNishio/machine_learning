@@ -73,7 +73,10 @@ def visualization_in_3d(data):
     Z = loss(data,X,Y)
 
     fig = plt.figure(2)
-    ax = Axes3D(fig)
+    ax = Axes3D(fig)  
+    ax.set_xlabel("beta_0")
+    ax.set_ylabel("beta_1")
+    ax.set_zlabel("LOSS")
     ax.plot_wireframe(X,Y,Z)
 
     fig = plt.figure(3)
