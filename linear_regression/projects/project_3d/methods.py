@@ -56,8 +56,8 @@ def random_search(data,real_beta):
 
 #linear_regression -- Newton method
 def newton_method(data,real_beta):
-    delta = 0.00001
-    epoch = 1000
+    delta = 0.0001
+    epoch = 800
     beta0_list = []
     beta1_list = []
     beta_n = [1,1]

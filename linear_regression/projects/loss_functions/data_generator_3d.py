@@ -26,7 +26,7 @@ def loss_1(beta0,beta1):
 
 #LOSS-2
 def loss_2(beta0,beta1):
-    loss = - 3 * np.exp(-(((beta0 - 2)**2)/3)-(((beta1 - 2)**2)/3)) - 4 * np.exp(-(((beta0 + 2)**2)/4)-(((beta1 + 2)**2)/4))
+    loss = - 4 * np.exp(-(((beta0 - 2)**2)/3)-(((beta1 - 2)**2)/3)) - 3 * np.exp(-(((beta0 + 2)**2)/4)-(((beta1 + 2)**2)/4))
     return loss
 
 
@@ -50,7 +50,7 @@ def visualization_in_3d(data):
 
     fig = plt.figure(2)
     cm = generate_cmap(['blue', 'indigo', 'red'])
-    interval = [i/10. -10 for i in range(1000)]
+    interval = [(i/10.)-10 for i in range(1000)]
     im = plt.contour(X, Y, Z, interval, alpha=0.5, cmap=cm)
     fig.colorbar(im)
     plt.xlim(-5, 5)
